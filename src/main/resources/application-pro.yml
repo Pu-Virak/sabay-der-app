@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    jdbc-url: jdbc:postgresql://ec2-107-21-67-46.compute-1.amazonaws.com:5432/dcoc5hhobce870
+    username: reopmufcwsmpph
+    password: f27c063e321cc40554b54d6618375c7f7eb3eb6db72a9db4e3e406ccd2d3bc97
