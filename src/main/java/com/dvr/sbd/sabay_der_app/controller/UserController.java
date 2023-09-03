@@ -21,7 +21,6 @@ import com.dvr.sbd.sabay_der_app.exception.SBDDuplicateException;
 import com.dvr.sbd.sabay_der_app.exception.SBDNotFoundException;
 import com.dvr.sbd.sabay_der_app.model.req.UserForRegisReq;
 import com.dvr.sbd.sabay_der_app.model.req.UserReq;
-import com.dvr.sbd.sabay_der_app.model.res.userDetailRes;
 import com.dvr.sbd.sabay_der_app.model.res.UserRes;
 import com.dvr.sbd.sabay_der_app.service.UserService;
 import com.dvr.sbd.sabay_der_app.utils.res.BaseRes;
