@@ -23,4 +23,6 @@ public interface ProvinceService {
     public boolean updateProvinceInfoByID(long id, ProvinceReq provinceReq) throws SBDBaseException;
 
     public boolean registerProvinceInfo(ProvinceForRegisReq provinceReq) throws SBDBaseException;
+
+    public boolean deleteProvinceInfoByID(long id) throws SBDBaseException;
 }

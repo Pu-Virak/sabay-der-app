@@ -81,9 +81,9 @@ public class BaseControllerAdvice {
          * @param msg
          * @return
          */
-        @ExceptionHandler(value = SDBBadRequestException.class)
+        @ExceptionHandler(value = SBDBadRequestException.class)
         @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-        public BaseRes<?> badRequest(SDBBadRequestException msg) {
+        public BaseRes<?> badRequest(SBDBadRequestException msg) {
                 return new BaseRes<>().setStatus(
                                 new BaseStatusRes<>()
                                                 .setCode(HttpStatus.BAD_REQUEST.value())

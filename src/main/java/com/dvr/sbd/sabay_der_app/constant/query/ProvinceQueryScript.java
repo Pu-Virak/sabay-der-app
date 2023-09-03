@@ -44,7 +44,7 @@ public class ProvinceQueryScript {
         , CREATED_DATE_TIME	    AS 		"createdDateTime"
         , UPDATED_DATE_TIME     AS 		"updatedDateTime"
       FROM PROVINCE
-      WHERE NAMEEN = #{nameEn}
+      WHERE NAME_EN = #{nameEn}
       """;
 
   public static final String retrieveProvinceInfoByUniqueNameKh = """
@@ -58,7 +58,7 @@ public class ProvinceQueryScript {
         , CREATED_DATE_TIME	    AS 		"createdDateTime"
         , UPDATED_DATE_TIME     AS 		"updatedDateTime"
       FROM PROVINCE
-      WHERE NAMEKH = #{nameKh}
+      WHERE NAME_KH = #{nameKh}
       """;
 
   public static final String retrieveProvinceInfoByIDForUpdate = """
@@ -80,8 +80,8 @@ public class ProvinceQueryScript {
       UPDATE
         PROVINCE
       SET
-          NAME_EN = COALESCE(#{provinceReq.nameEn}, NAMEEN)
-        , NAME_KH = COALESCE(#{provinceReq.nameKh}, NAMEKH)
+          NAME_EN = COALESCE(#{provinceReq.nameEn}, NAME_EN)
+        , NAME_KH = COALESCE(#{provinceReq.nameKh}, NAME_KH)
         , PROFILE = COALESCE(#{provinceReq.profile}, PROFILE)
         , CREATED_BY = COALESCE(#{provinceReq.createdBy}, CREATED_BY)
         , UPDATED_BY = COALESCE(#{provinceReq.updatedBy}, UPDATED_BY)
@@ -93,6 +93,10 @@ public class ProvinceQueryScript {
   public static final String registerProvinceInfo = """
       INSERT INTO PROVINCE(NAME_EN , NAME_KH , CREATED_BY , UPDATED_BY , CREATED_DATE_TIME , UPDATED_DATE_TIME )
       VALUES(#{provinceReq.nameEn}, #{provinceReq.nameKh}, #{provinceReq.createdBy}, #{provinceReq.updatedBy}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+      """;
+
+  public static final String deleteProvinceInfoByID = """
+      DELETE FROM PROVINCE WHERE ID = #{id}
       """;
 
 }

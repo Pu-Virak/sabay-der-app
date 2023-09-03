@@ -2,6 +2,7 @@ package com.dvr.sbd.sabay_der_app.repo;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.One;
@@ -48,4 +49,7 @@ public interface ProvinceRepo {
 
     @Insert(ProvinceQueryScript.registerProvinceInfo)
     public boolean registerProvinceInfo(@Param("provinceReq") ProvinceForRegisReq provinceReq);
+
+    @Delete(ProvinceQueryScript.deleteProvinceInfoByID)
+    public boolean deleteProvinceInfoByID(@Param("id") long id);
 }

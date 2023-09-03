@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class UserRes {
     private long id;
-    private String userID;
+    private String userName;
     @JsonIgnore
     private String password;
     private String gender;

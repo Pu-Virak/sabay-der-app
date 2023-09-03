@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dvr.sbd.sabay_der_app.exception.SBDBadRequestException;
 import com.dvr.sbd.sabay_der_app.exception.SBDBaseException;
 import com.dvr.sbd.sabay_der_app.exception.SBDDuplicateException;
 import com.dvr.sbd.sabay_der_app.exception.SBDNotFoundException;
-import com.dvr.sbd.sabay_der_app.exception.SDBBadRequestException;
 import com.dvr.sbd.sabay_der_app.model.req.ProvinceForRegisReq;
 import com.dvr.sbd.sabay_der_app.model.req.ProvinceReq;
 import com.dvr.sbd.sabay_der_app.model.res.ProvinceDetailRes;
@@ -129,7 +130,7 @@ public class ProvinceController {
                                 .setMessage("Register province Info Success!"))
                         .setPayload(null), HttpStatus.CREATED);
             }
-        } catch (SDBBadRequestException nfe) {
+        } catch (SBDBadRequestException nfe) {
             log.error("Register Province info failed.", nfe);
             throw new SBDNotFoundException(nfe.getMessage());
         } catch (SBDDuplicateException nfe) {
@@ -144,21 +145,57 @@ public class ProvinceController {
         }
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteProvinceInfoByID(@PathVariable long id) throws SBDBaseException {
+        log.info(">>>>>>>>>>>>> Delete Province Info Start >>>>>>>>>>>>>>>>>");
+        try {
+            // Validate param
+            if (id == 0) {
+                throw new SBDBadRequestException("Province ID for delete must not be null or empty!");
+            }
+            ProvinceDetailRes provinceData = this.provinceService.retrieveProvinceInfoByID(id);
+            if (provinceData == null) {
+                throw new SBDNotFoundException("Province ID = " + id + " was not found!");
+            }
+            boolean isSuccess = this.provinceService.deleteProvinceInfoByID(id);
+            if (!isSuccess) {
+                throw new SBDBaseException("Delete province Info by ID failed.");
+            } else {
+                return new ResponseEntity<>(new BaseRes<>()
+                        .setStatus(new BaseStatusRes<>().setCode(HttpStatus.OK.value()).setSuccess(true)
+                                .setMessage("Delete province Info Success!"))
+                        .setPayload(null), HttpStatus.OK);
+            }
+        } catch (SBDNotFoundException nfe) {
+            log.error("Delete Province info failed.", nfe);
+            throw new SBDNotFoundException(nfe.getMessage());
+        } catch (SBDBadRequestException nfe) {
+            log.error("Delete Province info failed.", nfe);
+            throw new SBDBadRequestException(nfe.getMessage());
+        } catch (SBDBaseException be) {
+            log.error("Delete Province info failed.", be);
+            throw new SBDBaseException(be.getMessage());
+        } catch (Exception e) {
+            log.error(">>>>>>>>>> Error occurred >>>>>>>>>>>>>", e);
+            throw new SBDBaseException("Delete Province info failed.");
+        }
+    }
+
     private void registerProvinceInfoValidation(ProvinceForRegisReq dataForRegisReq) throws SBDBaseException {
         if (dataForRegisReq == null) {
-            throw new SDBBadRequestException("Data for register must not be null.");
+            throw new SBDBadRequestException("Data for register must not be null.");
         }
         if (dataForRegisReq.getNameEn() == null || dataForRegisReq.getNameEn().isEmpty()) {
-            throw new SDBBadRequestException("Name EN must not be null.");
+            throw new SBDBadRequestException("Name EN must not be null.");
         }
         if (dataForRegisReq.getNameKh() == null || dataForRegisReq.getNameKh().isEmpty()) {
-            throw new SDBBadRequestException("Name KH must not be null.");
+            throw new SBDBadRequestException("Name KH must not be null.");
         }
         if (dataForRegisReq.getCreatedBy() == 0) {
-            throw new SDBBadRequestException("Created by must not be null.");
+            throw new SBDBadRequestException("Created by must not be null.");
         }
         if (dataForRegisReq.getUpdatedBy() == 0) {
-            throw new SDBBadRequestException("Updated by must not be null.");
+            throw new SBDBadRequestException("Updated by must not be null.");
         }
         if (this.provinceService.retrieveProvinceInfoByUniqueNameEn(dataForRegisReq.getNameEn()) != null) {
             throw new SBDDuplicateException("Province name was already existed.");

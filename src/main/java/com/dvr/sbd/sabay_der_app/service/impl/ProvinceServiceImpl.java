@@ -55,4 +55,9 @@ public class ProvinceServiceImpl implements ProvinceService {
         return provinceRepo.retrieveProvinceInfoByUniqueNameKh(nameKh);
     }
 
+    @Override
+    public boolean deleteProvinceInfoByID(long id) throws SBDBaseException {
+        return provinceRepo.deleteProvinceInfoByID(id);
+    }
+
 }
