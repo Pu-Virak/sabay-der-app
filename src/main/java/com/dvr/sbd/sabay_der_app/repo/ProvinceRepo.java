@@ -29,6 +29,9 @@ public interface ProvinceRepo {
     @Select(ProvinceQueryScript.retrieveProvinceInfoByID)
     public ProvinceDetailRes retrieveProvinceInfoByID(@Param("id") long id);
 
+    @Select(ProvinceQueryScript.retrieveProvinceInfoByID)
+    public ProvinceRes retrieveProvinceLessInfoByID(@Param("id") long id);
+
     @Result(property = "createdBy", column = "createdBy", one = @One(select = "com.dvr.sbd.sabay_der_app.repo.UserRepo.retrieveUserInfoByID"), javaType = UserRes.class)
     @Result(property = "updatedBy", column = "updatedBy", one = @One(select = "com.dvr.sbd.sabay_der_app.repo.UserRepo.retrieveUserInfoByID"), javaType = UserRes.class)
     @Select(ProvinceQueryScript.retrieveProvinceInfoByUniqueNameEn)

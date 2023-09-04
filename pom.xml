@@ -64,7 +64,13 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-	</dependencies>
+	
+   <dependency>
+     <groupId>com.github.onozaty</groupId>
+     <artifactId>mybatis-postgresql-typehandlers</artifactId>
+     <version>1.0.2</version>
+   </dependency>
+ </dependencies>
 
 	<build>
 		<plugins>
