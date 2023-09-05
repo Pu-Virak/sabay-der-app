@@ -1,5 +1,7 @@
 package com.dvr.sbd.sabay_der_app.repo;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.One;
 import org.apache.ibatis.annotations.Param;
@@ -8,6 +10,7 @@ import org.apache.ibatis.annotations.Select;
 
 import com.dvr.sbd.sabay_der_app.constant.query.PlaceQueryScript;
 import com.dvr.sbd.sabay_der_app.model.res.PlaceDetailRes;
+import com.dvr.sbd.sabay_der_app.model.res.PlaceRes;
 import com.dvr.sbd.sabay_der_app.model.res.UserRes;
 import com.github.onozaty.mybatis.pg.type.list.StringListTypeHandler;
 
@@ -20,5 +23,8 @@ public interface PlaceRepo {
     @Result(property = "slideShow", column = "slideShow", typeHandler = StringListTypeHandler.class)
     @Select(PlaceQueryScript.retrievePlaceInfoByID)
     public PlaceDetailRes retrievePlaceInfoByID(@Param("id") long id);
+
+    @Select(PlaceQueryScript.retrieveListPlaceInfo)
+    public List<PlaceRes> retrieveListPlaceInfo(@Param("page") long page, @Param("size") long size);
 
 }
