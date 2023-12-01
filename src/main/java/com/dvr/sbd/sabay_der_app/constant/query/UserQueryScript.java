@@ -4,7 +4,7 @@ public class UserQueryScript {
   public static final String retrieveListUserInfo = """
           SELECT
                                     id					AS 		"id"
-                                  , username				AS 		"username"
+                                  , user_id				AS 		"username"
                                   , "password"			AS 		"password"
                                   , gender				AS 		"gender"
                                   , date_of_birth			AS 		"dateOfBirth"
@@ -22,7 +22,7 @@ public class UserQueryScript {
   public static final String retrieveUserInfoByID = """
           SELECT
                                     id					AS 		"id"
-                                  , username				AS 		"username"
+                                  , user_id				AS 		"username"
                                   , "password"			AS 		"password"
                                   , gender				AS 		"gender"
                                   , date_of_birth			AS 		"dateOfBirth"
@@ -38,7 +38,7 @@ public class UserQueryScript {
   public static final String retrieveUserInfoByIDForUpdate = """
           SELECT
                                     id					AS 		"id"
-                                  , username				AS 		"username"
+                                  , user_id				AS 		"username"
                                   , "password"			AS 		"password"
                                   , gender				AS 		"gender"
                                   , date_of_birth			AS 		"dateOfBirth"
@@ -55,7 +55,7 @@ public class UserQueryScript {
   public static final String retrieveUserInfoByUsername = """
           SELECT
                                     id					AS 		"id"
-                                  , username				AS 		"username"
+                                  , user_id				AS 		"username"
                                   , "password"			AS 		"password"
                                   , gender				AS 		"gender"
                                   , date_of_birth			AS 		"dateOfBirth"
@@ -66,17 +66,17 @@ public class UserQueryScript {
                                   , created_date_time		AS 		"createdDateTime"
                                   , updated_date_time		AS 		"updatedDateTime"
           FROM "user"
-          WHERE username = #{username}
+          WHERE user_id = #{username}
       """;
   public static final String registerUserInfo = """
-      INSERT INTO "user"(username, PASSWORD, GENDER, DATE_OF_BIRTH, PROFILE, EMAIL, ADDRESS, STATUS, CREATED_DATE_TIME, UPDATED_DATE_TIME)
+      INSERT INTO "user"(user_id, PASSWORD, GENDER, DATE_OF_BIRTH, PROFILE, EMAIL, ADDRESS, STATUS, CREATED_DATE_TIME, UPDATED_DATE_TIME)
       VALUES(#{userReq.username}, #{userReq.password}, #{userReq.gender}, #{userReq.dateOfBirth}, #{userReq.profile}, #{userReq.email}, #{userReq.address}, #{userReq.status}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
       """;
   public static final String updateUserInfoByID = """
       UPDATE
         "user"
       SET
-          username = COALESCE(#{userReq.username}, username)
+          user_id = COALESCE(#{userReq.username}, user_id)
         , PASSWORD = COALESCE(#{userReq.password}, PASSWORD)
         , GENDER = COALESCE(#{userReq.gender}, GENDER)
         , DATE_OF_BIRTH = COALESCE(#{userReq.dateOfBirth}, DATE_OF_BIRTH)

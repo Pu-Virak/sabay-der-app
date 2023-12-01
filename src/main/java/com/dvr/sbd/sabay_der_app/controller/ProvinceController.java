@@ -42,12 +42,13 @@ public class ProvinceController {
     private final UserService userService;
 
     @GetMapping("/list-provinces")
-    public ResponseEntity<?> retrieveListProvinceInfo(@RequestParam("page") long page, @RequestParam("size") long size)
+    public ResponseEntity<?> retrieveListProvinceInfo(@RequestParam("page") String page,
+            @RequestParam("size") String size)
             throws SBDBaseException {
         log.info(">>>>>>>>>>>>> Retrieve List Provinces Start >>>>>>>>>>>>>>>>>");
         try {
             List<ProvinceRes> listProvinces = new ArrayList<>();
-            listProvinces = this.provinceService.retrieveProvinceInfo(page, size);
+            listProvinces = this.provinceService.retrieveProvinceInfo(Long.parseLong(page), Long.parseLong(size));
             log.info(">>>>>>>>>>>> Data Response: {}", listProvinces);
             return new ResponseEntity<>(new BaseRes<>()
                     .setStatus(new BaseStatusRes<>().setCode(HttpStatus.OK.value()).setSuccess(true)

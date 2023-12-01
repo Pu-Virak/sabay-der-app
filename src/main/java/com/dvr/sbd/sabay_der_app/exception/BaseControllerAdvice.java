@@ -14,7 +14,7 @@ import com.dvr.sbd.sabay_der_app.utils.res.BaseStatusRes;
  * </pre>
  * 
  * @author Det Virak
- * @version 1.0.0, 2023/082/6
+ * @version 1.0.0, 2023/08/26
  */
 @RestControllerAdvice
 public class BaseControllerAdvice {
@@ -87,6 +87,24 @@ public class BaseControllerAdvice {
                 return new BaseRes<>().setStatus(
                                 new BaseStatusRes<>()
                                                 .setCode(HttpStatus.BAD_REQUEST.value())
+                                                .setMessage(msg.getMessage())
+                                                .setSuccess(false));
+        }
+
+        /**
+         * <pre>
+         *  Bad Request Error Handle
+         * </pre>
+         * 
+         * @param msg
+         * @return
+         */
+        @ExceptionHandler(value = FileStorageException.class)
+        @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+        public BaseRes<?> uploadFailed(FileStorageException msg) {
+                return new BaseRes<>().setStatus(
+                                new BaseStatusRes<>()
+                                                .setCode(HttpStatus.INTERNAL_SERVER_ERROR.value())
                                                 .setMessage(msg.getMessage())
                                                 .setSuccess(false));
         }

@@ -15,7 +15,6 @@ import com.dvr.sbd.sabay_der_app.exception.SBDBaseException;
 import com.dvr.sbd.sabay_der_app.exception.SBDNotFoundException;
 import com.dvr.sbd.sabay_der_app.model.res.PlaceDetailRes;
 import com.dvr.sbd.sabay_der_app.model.res.PlaceRes;
-import com.dvr.sbd.sabay_der_app.model.res.ProvinceRes;
 import com.dvr.sbd.sabay_der_app.service.PlaceService;
 import com.dvr.sbd.sabay_der_app.utils.res.BaseRes;
 import com.dvr.sbd.sabay_der_app.utils.res.BaseStatusRes;
